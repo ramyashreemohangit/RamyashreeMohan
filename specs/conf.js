@@ -11,7 +11,7 @@ exports.config = {
      specs: ['Calculator.js']*/
     //specs: ['Project1_Form submission.js']
   specs: [
-    'Spec.js'
+    'Project1_EcommerceSpec.js'
   ],
 
   capabilities: {
