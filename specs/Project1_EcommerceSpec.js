@@ -16,6 +16,20 @@ describe("This is ecommerce website", function () {
         })
     }
 
+    var getTotal = function()
+    {
+        element(by.xpath("//h3/strong")).getText().then(function(text)
+        {
+            var textUpdated = text.split(".");
+            var textAfterTrim = textUpdated[0].trim();
+            console.log("Text after trim "+textAfterTrim);
+            return textAfterTrim;
+        })
+    }
+
+    var returnedValue = getTotal();
+     console.log("GET TOTAL IS "+returnedValue);
+
 
     it("This is test case for ecommerce website to add items to cart", function () {
         browser.get("https://qaclickacademy.github.io/protocommerce/");
@@ -49,6 +63,7 @@ describe("This is ecommerce website", function () {
         })*/
 
         var total=0;
+        var sumOfAll = 0;
         element.all(by.buttonText("Remove")).count().then(function(counts){
             console.log("Counts is "+counts);
             return counts;
@@ -59,19 +74,18 @@ describe("This is ecommerce website", function () {
                     //++i;
                     console.log("Price is " + price);
                     priceUpdated = price.split(".");
-                    priceUpdated = priceUpdated[1].trim();
-                    console.log("Price updated is "+priceUpdated[1]);
-                    total = Number(total + priceUpdated[1]);
+                    priceUpdatedNow = priceUpdated[1].trim();
+                    console.log("Price updated is "+priceUpdatedNow);
+                    total = +total + +priceUpdatedNow;
+                    sumOfAll = total;
                     console.log("Total is "+total);
 
                 })
             }
+        }).then(function(){
+           var returnedValue = getTotal();
+            console.log("GET TOTAL IS "+returnedValue);
         })
-
-        element(by.xpath("//h3/strong")).getText().then(function(text){
-            console.log("Text is "+text);
-        })
-
 
     })
 
