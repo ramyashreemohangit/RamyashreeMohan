@@ -2,67 +2,40 @@
  * Created by admin on 19/06/20.
  */
 
-var objToPageObjectFile = require("../page objects/Banking_RA_pageobject.js");
+var bankPO = require("../pageObjects/Banking_RA_pageobject.js");
 
-describe("This is Banking project",function(){
-
-
-    it("This is test case",function(){
-
-        objToPageObjectFile.urlHit;
-
-        objToPageObjectFile.customerLogin();
-
-        objToPageObjectFile.selectCustName("Harry Potter");
-
-        objToPageObjectFile.login();
-
-        objToPageObjectFile.selectAccountNumber(1005);
-
-        objToPageObjectFile.clickwithdrawlButton();
-
-        objToPageObjectFile.enterWithdrawAmount(balanceAfterDeposit);
-
-        //objToPageObjectFile.clickOnWithdraw();
-
-        //objToPageObjectFile.readTransactionFailureMsg();
-
-        objToPageObjectFile.clickDepositTab();
-
-        var oldBalance =  objToPageObjectFile.getBalance().then(function(bal){
+describe("This is Banking project", function() {
+    it("This is test case", function() {
+        bankPO.urlHit;
+        bankPO.customerLogin();
+        bankPO.selectCustName("Harry Potter");
+        bankPO.login();
+        bankPO.selectAccountNumber(1005);
+        bankPO.clickwithdrawlButton();
+        bankPO.enterWithdrawAmount(balanceAfterDeposit);
+        //bankPO.clickOnWithdraw();
+        //bankPO.readTransactionFailureMsg();
+        bankPO.clickDepositTab();
+        var oldBalance = bankPO.getBalance().then(function(bal) {
             return bal;
         })
-
-        var depositedAmount = objToPageObjectFile.enterDepositAmount();
-
-        objToPageObjectFile.clickDepositButton();
-
-        objToPageObjectFile.readDepositSuccessMsg();
-
-        var balanceAfterDeposit =  objToPageObjectFile.getBalance().then(function(bal){
+        var depositedAmount = bankPO.enterDepositAmount();
+        bankPO.clickDepositButton();
+        bankPO.readDepositSuccessMsg();
+        var balanceAfterDeposit = bankPO.getBalance().then(function(bal) {
             return bal;
         })
-
-        objToPageObjectFile.verifyBalance(oldBalance,balanceAfterDeposit,depositedAmount);
-
-        objToPageObjectFile.clickTransactionTab();
-
-        objToPageObjectFile.getTransaction(depositedAmount);
-
-        objToPageObjectFile.clickBackButton();
-
-        objToPageObjectFile.clickwithdrawlButton();
-
-        var withdrawAmount = objToPageObjectFile.enterWithdrawAmount(balanceAfterDeposit);
-
-        objToPageObjectFile.readTransactionSuccessMsg();
-
-        var balanceAfterWithdraw = objToPageObjectFile.getBalance().then(function(bal){
+        bankPO.verifyBalance(oldBalance, balanceAfterDeposit, depositedAmount);
+        bankPO.clickTransactionTab();
+        bankPO.getTransaction(depositedAmount);
+        bankPO.clickBackButton();
+        bankPO.clickwithdrawlButton();
+        var withdrawAmount = bankPO.enterWithdrawAmount(balanceAfterDeposit);
+        bankPO.readTransactionFailureMsg();
+        var balanceAfterWithdraw = bankPO.getBalance().then(function(bal) {
             return bal;
         })
-
-        objToPageObjectFile.verifyBalance(balanceAfterDeposit,balanceAfterWithdraw,withdrawAmount);
-
-        objToPageObjectFile.chainedPromise();
+        bankPO.verifyBalance(balanceAfterDeposit, balanceAfterWithdraw, withdrawAmount);
+        //bankPO.chainedPromise();
     })
 })
