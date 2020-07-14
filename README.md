@@ -1,4 +1,4 @@
-# WETESTERR-MENTEE-RAMYA
+
 Test Automation Using Protractor
 
 To run
